@@ -1,0 +1,5 @@
+<Root>
+	<OutPath>/Game/Lua/Common/i18n.lua</OutPath>
+	<IgnorePath>i18n.lua</IgnorePath>
+	<ScanDir>/Game/Lua</ScanDir>
+</Root>
