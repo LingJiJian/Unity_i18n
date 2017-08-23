@@ -1,4 +1,29 @@
-﻿using UnityEngine;
+﻿/****************************************************************************
+Copyright (c) 2015 Lingjijian
+
+Created by Lingjijian on 2015
+
+342854406@qq.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+****************************************************************************/
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UI;
@@ -27,14 +52,14 @@ public class I18nExporter : Editor
 
     private static void Load()
     {
-		_outputPath = Application.dataPath + "/Game/Lua/Common/i18n.lua";
-		_scanDir = Application.dataPath + "/Game/Lua";
+		_outputPath = Application.dataPath + "/Lua/Common/i18n.lua";
+		_scanDir = Application.dataPath + "/Lua";
 		_ignorePath = new List<string>()
 		{
 			"i18n.lua"
 		};
 
-		TextAsset textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath("Asset/Editor/I18nExporter/config.xml",typeof(TextAsset));
+		TextAsset textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath("Asset/Editor/I18nExporter/config.txt",typeof(TextAsset));
         if (textAsset)
         {
             XmlDocument doc = new XmlDocument();
@@ -72,7 +97,11 @@ public class I18nExporter : Editor
 					string value = line.Substring (startIdx, endIdx - startIdx);
 					markDic.Add (string.Format ("i18n[\"{0}\"]", key), value);
 
-					_markIdMap.Add (int.Parse (key));
+                    int n; //只存数字键
+                    if(int.TryParse(key,out n))
+                    {
+					   _markIdMap.Add (n);
+                    }
 				} else if (line.StartsWith ("--# ") && line.EndsWith(".lua")) {
 					int startIdx = line.IndexOf ("--# ") + 4;
 					int endIdx = line.LastIndexOf (".lua") + 4;

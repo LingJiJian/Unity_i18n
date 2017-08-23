@@ -10,4 +10,5 @@ i18n["1006"] = "这是UI上面的中文"
 i18n["1000"] = "这是UI上面的中文"
 --# /Game/Resources/Prefab\lab_item.prefab
 i18n["1003"] = "又是一句中文"
+i18n["myCustomText"] = "这个Key值不是数字"
 return i18n

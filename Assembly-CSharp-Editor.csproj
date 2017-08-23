@@ -71,7 +71,7 @@
      <Compile Include="Assets\ToLua\Editor\ToLuaExport.cs" />
      <Compile Include="Assets\ToLua\Editor\ToLuaMenu.cs" />
      <Compile Include="Assets\ToLua\Editor\ToLuaTree.cs" />
-     <None Include="Assets\Editor\config.txt" />
+     <None Include="Assets\Editor\I18nExporter\config.txt" />
      <None Include="Assets\link.xml" />
      <None Include="Assets\ToLua\readme.txt" />
  <Reference Include="UnityEditor.Advertisements">
