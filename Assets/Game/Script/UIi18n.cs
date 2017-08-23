@@ -32,10 +32,10 @@ public class UIi18n : MonoBehaviour {
 	public string key;
 	public Text text;
 
-	void Start()
+	void Awake()
 	{	
 		LuaTable i18n = Game.GetLuaState().GetTable ("i18n");
-		if(i18n[key] != null){
+		if(i18n != null && i18n[key] != null){
 			text.text = i18n[key].ToString();
 		}
 	}

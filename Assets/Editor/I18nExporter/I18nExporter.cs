@@ -225,7 +225,8 @@ public class I18nExporter : Editor
 							i18n = textComp.gameObject.AddComponent<UIi18n>();
 							_markId = getNextMarkId();
 							i18n.key = _markId.ToString();
-							i18n.text = textComp;
+                            i18n.text = textComp;
+                            string content = textComp.text.Replace("\n","\\n").Replace("\r","").Replace("\"","\\\"");
 							
 							Dictionary<string,string> markDic;
 							if(_markDatas.ContainsKey(basename)){
@@ -234,7 +235,7 @@ public class I18nExporter : Editor
 								markDic = new Dictionary<string, string>();
 								_markDatas.Add(basename,markDic);
 							}
-							markDic.Add(string.Format("i18n[\"{0}\"]",_markId),textComp.text);
+							markDic.Add(string.Format("i18n[\"{0}\"]",_markId),content);
 						}
 					}
                 }
@@ -300,16 +301,20 @@ public class I18nExporter : Editor
     private static int getNextMarkId()
     {
 		int curMarkId = 1000;
-		List<int> sortList = new List<int> ();
-		foreach (int i in _markIdMap) {
-			sortList.Add (i);
-		}
-		sortList.Sort ();
-		while (sortList.Contains (curMarkId)) {
-			curMarkId++;
-		}
-		_markIdMap.Add (curMarkId);
-		return curMarkId;
+        List<int> sortList = new List<int> ();
+        foreach (int i in _markIdMap) {
+            sortList.Add (i);
+        }
+        sortList.Sort ();
+
+        for(int i = 1000;i <= 99999 ;i++){
+            if(!sortList.Contains(i)){
+                curMarkId = i;
+                break;
+            }
+        }
+        _markIdMap.Add (curMarkId);
+        return curMarkId;
     }
 
     private static bool isChinese(string text)
