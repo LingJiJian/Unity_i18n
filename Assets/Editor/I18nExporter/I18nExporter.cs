@@ -125,6 +125,7 @@ public class I18nExporter : Editor
         {
             _markDatas = new Dictionary<string, Dictionary<string, string>>();
             _markFiles = new Dictionary<string, string>();
+            _markIdMap = new HashSet<int>();
             _markId = 1000;
         }
     }
